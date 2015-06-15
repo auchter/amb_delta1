@@ -1,0 +1,26 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+	compatible = "brcm,bcm2708";
+
+	fragment@0 {
+		target-path = "/";
+		__overlay__ {
+			amb_delta1: amb_delta1 {
+				compatible = "amb,delta1";
+				status = "okay";
+				i2c-bus = <&i2c1>;
+				set-relay-addr = <0x3f>;
+				clr-relay-addr = <0x3e>;
+			};
+		};
+	};
+
+	fragment@1 {
+		target = <&i2c1>;
+		__overlay__ {
+			status = "okay";
+		};
+	};
+};
