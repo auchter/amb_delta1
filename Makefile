@@ -7,7 +7,7 @@ else
 KDIR ?= /lib/modules/$(shell uname -r)/build
 PWD := $(shell pwd)
 
-all: modules amb-delta1-overlay.dtb
+all: modules amb-delta1-rpi-overlay.dtb
 
 modules:
 	$(MAKE) -C $(KDIR) M=$(PWD) modules
