@@ -18,7 +18,7 @@ devicetree overlay, should work fine on other devices as well.
 #
 ```
 
-## Interface with a Raspberry Pi
+## Interfacing with a Raspberry Pi
 
 The included `amb-delta1-rpi-overlay.dts` is a devicetree overlay intended for
 use on a Raspberry Pi with a δ1 directly interfaced to its i2c bus.
