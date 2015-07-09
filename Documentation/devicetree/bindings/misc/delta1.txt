@@ -1,0 +1,19 @@
+AMB Delta 1 R-2R attenuator
+==========================
+
+Required properties:
+
+- compatible: "amb,delta1"
+- i2c-bus: phandle to the i2c bus the delta1 is connected to
+- set-relay-addr: address of i/o expander to control "set". set by JP1[ABC]+
+- clr-relay-addr: address of i/o expander to control "clear"; set by JP1[ABC]-
+
+Example
+=======
+
+amb_delta1: amb_delta1 {
+	compatible = "amb,delta1";
+	i2c-bus = <&i2c1>;
+	set-relay-addr = <0x3f>;
+	clr-relay-addr = <0x3e>;
+};
