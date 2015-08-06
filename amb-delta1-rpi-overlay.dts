@@ -13,6 +13,7 @@
 				i2c-bus = <&i2c1>;
 				set-relay-addr = <0x3f>;
 				clr-relay-addr = <0x3e>;
+				relay-supply = <&delta1_reg>;
 			};
 		};
 	};

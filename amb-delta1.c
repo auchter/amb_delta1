@@ -154,7 +154,7 @@ static int delta1_probe(struct platform_device *pdev)
 		return -EINVAL;
 	}
 
-	dev->reg = devm_regulator_get(&pdev->dev, "vdd_delta1");
+	dev->reg = devm_regulator_get(&pdev->dev, "relay");
 	if (IS_ERR(dev->reg))
 	{
 		err = PTR_ERR(dev->reg);
