@@ -23,4 +23,32 @@
 			status = "okay";
 		};
 	};
+
+	fragment@2 {
+		target-path = "/";
+		__overlay__ {
+			delta1_reg: fixedregulator {
+				compatible = "regulator-fixed";
+				regulator-name = "vdd_delta1";
+				regulator-min-microvolt = <5000000>;
+				regulator-max-microvolt = <5000000>;
+				enable-active-high;
+				pinctrl-names = "default";
+				pinctrl-0 = <&delta1_pins>;
+				gpio = <&gpio 17 0>;
+				startup-delay-us = <10000>;
+			};
+		};
+	};
+
+	fragment@3 {
+		target = <&gpio>;
+		__overlay__ {
+			delta1_pins: delta1_pins {
+				brcm.pins = <17>;
+				brcm.function = <1>;
+				brcm.pull = <0>;
+			};
+		};
+	};
 };
