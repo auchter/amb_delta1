@@ -28,8 +28,10 @@
 #include <linux/device.h>
 #include <linux/i2c.h>
 #include <linux/delay.h>
+#include <linux/regulator/consumer.h>
 
 struct delta1 {
+	struct regulator *reg;
 	u32 set_relay_addr;
 	u32 clr_relay_addr;
 	struct i2c_adapter *i2c_adap;
@@ -152,6 +154,17 @@ static int delta1_probe(struct platform_device *pdev)
 		return -EINVAL;
 	}
 
+	dev->reg = devm_regulator_get(&pdev->dev, "vdd_delta1");
+	if (IS_ERR(dev->reg))
+	{
+		err = PTR_ERR(dev->reg);
+		goto out;
+	}
+
+	err = regulator_enable(dev->reg);
+	if (err)
+		goto out;
+
 	err = set_volume(dev, 0, true);
 	if (err)
 		goto out;
@@ -170,6 +183,7 @@ static int delta1_remove(struct platform_device *pdev)
 {
 	struct delta1 *d = dev_get_drvdata(&pdev->dev);
 
+	regulator_disable(d->reg);
 	device_remove_file(&pdev->dev, &dev_attr_volume);
 	if (d->i2c_adap)
 		put_device(&d->i2c_adap->dev);
